@@ -6,7 +6,11 @@ This lab uses OpenMP for shared-memory parallelism in C.
 
 Each question is a separate C program in its own folder:
 
-- `q1/` — Hello World from each OpenMP thread
+- `HelloWorld/` — Hello World from each OpenMP thread
+- `q1/` — Shared vs private variables
+- `q2/` — Element-wise sum of two arrays (cores vs extra threads)
+- `q3/` — Sum of integers 1 to N (parallel for vs reduction)
+- `q4/` — Nested `for` loops with `collapse(2)` (2-D matrix add)
 
 ## macOS OpenMP configuration
 
@@ -52,6 +56,14 @@ gcc-16 -fopenmp sample.c -o sample.out
 ./sample.out
 ```
 
+Q4 is the same from `q4/`. Q3 needs `N` on stdin, for example:
+
+```bash
+cd q3
+gcc-16 -fopenmp sample2.c -o sample.out
+echo 10 | ./sample.out
+```
+
 Optional: set the number of threads (default is all CPU cores):
 
 ```bash
@@ -86,11 +98,33 @@ ompcc sample.c -o sample.out
 
 ## Question summary
 
-### Q1 — Hello World
+### Hello World
 
 - Uses `#pragma omp parallel` so each thread runs the same block.
 - Each thread prints `Hello World` with its thread id and the total thread count.
 - Thread print order can change between runs.
+
+### Q1 — Shared vs private
+
+- `shared(shared_var)`: all threads update one copy; the value after the region is changed.
+- `private(private_var)`: each thread has its own copy; the original stays 10 after the region.
+
+### Q2 — Array element-wise sum
+
+- `q2/sample1.c` — `parallel for` with the default thread count (CPU cores).
+- `q2/sample2.c` — `parallel for num_threads(24)` regardless of core count.
+
+### Q3 — Sum 1 to N
+
+- `q3/sample1.c` — `parallel for` plus `critical` (no reduction).
+- `q3/sample2.c` — `parallel for reduction(+:sum)`.
+- Both programs read `N` from stdin.
+
+### Q4 — Nested for loops
+
+- Adds two 4×4 matrices.
+- `#pragma omp parallel for collapse(2)` splits the nested `i`/`j` loops across threads.
+- Prints which thread computed each `C[i][j]`.
 
 ## Notes
 
