@@ -11,6 +11,10 @@ Each question is a separate C program in its own folder:
 - `q2/` — Element-wise sum of two arrays (cores vs extra threads)
 - `q3/` — Sum of integers 1 to N (parallel for vs reduction)
 - `q4/` — Nested `for` loops with `collapse(2)` (2-D matrix add)
+- `q5/` — Sum of first 100 integers with parallel for
+- `q6/` — Maximum element of an array
+- `q7/` — Factorial of different numbers, one per thread
+- `q8/` — Safe increment counter using OpenMP locks
 
 ## macOS OpenMP configuration
 
@@ -125,6 +129,26 @@ ompcc sample.c -o sample.out
 - Adds two 4×4 matrices.
 - `#pragma omp parallel for collapse(2)` splits the nested `i`/`j` loops across threads.
 - Prints which thread computed each `C[i][j]`.
+
+### Q5 — Sum of first 100 integers
+
+- `#pragma omp parallel for reduction(+:sum)` adds 1 through 100.
+- Prints the computed sum and the closed-form `n*(n+1)/2`.
+
+### Q6 — Maximum of an array
+
+- `#pragma omp parallel for reduction(max:max_val)` finds the largest element.
+- Works on a fixed sample array of 12 integers.
+
+### Q7 — Parallel factorials
+
+- Four threads; thread `tid` computes `nums[tid]!`.
+- Each thread prints its number and factorial.
+
+### Q8 — Locked increment counter
+
+- `omp_init_lock` / `omp_set_lock` / `omp_unset_lock` protect `counter++`.
+- Four threads each increment 100000 times; final value should match 400000.
 
 ## Notes
 

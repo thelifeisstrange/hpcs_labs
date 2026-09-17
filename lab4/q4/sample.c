@@ -58,7 +58,7 @@ int main(int argc, char *argv[]) {
         }
     }
 
-    MPI_Gatherv(local, my_len, MPI_CHAR, result, recvcounts, displs, MPI_CHAR, 0, MPI_COMM_WORLD);
+    MPI_Gather(local, my_len, MPI_CHAR, result, recvcounts, displs, MPI_CHAR, 0, MPI_COMM_WORLD);
 
     p_end = MPI_Wtime();
     printf("Process %d: '%c' x %d = %s, time = %lf seconds\n",
