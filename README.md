@@ -58,7 +58,7 @@ HPCS/
 │   └── README.md
 ├── lab5/                          # Lab 5: OpenMP shared-memory programming
 │   ├── HelloWorld/                # Thread creation and thread ID reporting
-│   ├── q1/ ... q8/                # Scopes, parallel for, reductions, collapse(2), locks
+│   ├── q1/ ... q12/               # Scopes, parallel for, reductions, merge sort, pi, …
 │   └── README.md
 ├── lab6/                          # Lab 6: CUDA basics on 1-D vectors
 │   ├── q1/ ... q3/                # Vector add, decimal-to-octal, alternating swap
@@ -184,6 +184,10 @@ Covers compiler directives (`#pragma omp`), data sharing attributes (`shared`, `
 | [`lab5/q6`](file:///Users/yogeshkulkarni/Documents/Manipal_Edu/HPCS/lab5/q6) | `sample.c` | `parallel for reduction(max:max_val)` | Computes the maximum element of an integer array in parallel. |
 | [`lab5/q7`](file:///Users/yogeshkulkarni/Documents/Manipal_Edu/HPCS/lab5/q7) | `sample.c` | Static work distribution | Computes distinct factorials concurrently, one unique value per thread. |
 | [`lab5/q8`](file:///Users/yogeshkulkarni/Documents/Manipal_Edu/HPCS/lab5/q8) | `sample.c` | `omp_lock_t`, `omp_init_lock`, `omp_set_lock`, `omp_unset_lock` | Protects a shared counter across high-frequency increments ($4 \times 100,000$) to guarantee race-free accuracy. |
+| [`lab5/q9`](file:///Users/yogeshkulkarni/Documents/Manipal_Edu/HPCS/lab5/q9) | `sample.c` | `#pragma omp parallel sections` | Parallel merge sort: left/right halves as OpenMP sections, then merge. |
+| [`lab5/q10`](file:///Users/yogeshkulkarni/Documents/Manipal_Edu/HPCS/lab5/q10) | `sample.c` | `#pragma omp parallel for` | Row-wise and column-wise maxima of a sample $4 \times 4$ matrix. |
+| [`lab5/q11`](file:///Users/yogeshkulkarni/Documents/Manipal_Edu/HPCS/lab5/q11) | `sample.c` | `parallel for reduction(+:count)`, `omp_get_wtime` | Counts primes in $1..n$; compares serial vs parallel wall-clock time. |
+| [`lab5/q12`](file:///Users/yogeshkulkarni/Documents/Manipal_Edu/HPCS/lab5/q12) | `sample.c` | `parallel for reduction(+:sum)` | Approximates $\pi$ via the Leibniz series. |
 
 *Documentation:* [`lab5/README.md`](file:///Users/yogeshkulkarni/Documents/Manipal_Edu/HPCS/lab5/README.md)
 

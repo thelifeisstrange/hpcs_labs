@@ -1,0 +1,18 @@
+OpenMP additional programs (added as lab5 q9–q12; Q5 already as q7)
+
+1. Write an OpenMP program to sort an array of n elements using parallel
+   merge sort with the sections directive.          -> q9/
+
+2. Write an OpenMP program that reads a matrix, finds the maximum element
+   in each row and the maximum element in each column, and displays them.
+   Use parallel for loops and show the output for a sample 4x4 matrix.
+                                                    -> q10/
+
+3. Write an OpenMP program to find the prime numbers from 1 to n employing
+   parallel for directive. Record both serial and parallel execution times.
+                                                    -> q11/
+
+4. Write an OpenMP program for pi calculation.      -> q12/
+
+5. Create a program where multiple threads calculate factorial of different
+   numbers in parallel.                             -> q7/ (already present)

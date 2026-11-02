@@ -15,6 +15,10 @@ Each question is a separate C program in its own folder:
 - `q6/` — Maximum element of an array
 - `q7/` — Factorial of different numbers, one per thread
 - `q8/` — Safe increment counter using OpenMP locks
+- `q9/` — Parallel merge sort with `sections`
+- `q10/` — Row and column maxima of a 4×4 matrix
+- `q11/` — Primes 1..n (serial vs parallel timing)
+- `q12/` — π calculation (Leibniz series + reduction)
 
 ## macOS OpenMP configuration
 
@@ -149,6 +153,26 @@ ompcc sample.c -o sample.out
 
 - `omp_init_lock` / `omp_set_lock` / `omp_unset_lock` protect `counter++`.
 - Four threads each increment 100000 times; final value should match 400000.
+
+### Q9 — Parallel merge sort (`sections`)
+
+- Recursively splits the array; left and right halves run in `#pragma omp parallel sections`.
+- Each half is an `#pragma omp section`; then sequential `merge`.
+
+### Q10 — Matrix row / column maxima
+
+- Sample 4×4 matrix; `#pragma omp parallel for` over rows, then over columns.
+- Prints each row max and each column max.
+
+### Q11 — Primes with timing
+
+- Serial loop counts primes in `1..n`, then parallel `for` with `reduction(+:count)`.
+- Prints both counts and `omp_get_wtime()` durations.
+
+### Q12 — Pi (Leibniz)
+
+- `π/4 = 1 − 1/3 + 1/5 − 1/7 + …` with `parallel for reduction(+:sum)`.
+- Prints approximate π and elapsed time.
 
 ## Notes
 
